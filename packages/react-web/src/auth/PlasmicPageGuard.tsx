@@ -1,6 +1,6 @@
 import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
-import * as plasmicQuery from "@plasmicapp/query";
-import React from "react";
+import { PrepassContext } from "@plasmicapp/query";
+import React, { useContext } from "react";
 
 // https://stackoverflow.com/a/2117523
 function uuidv4() {
@@ -72,6 +72,7 @@ export function PlasmicPageGuard(props: PlasmicPageGuardProps) {
   } = props;
 
   const dataSourceCtxValue = usePlasmicDataSourceContext();
+  const prepass = useContext(PrepassContext);
 
   React.useEffect(() => {
     if (canTriggerLogin) {
@@ -113,7 +114,7 @@ export function PlasmicPageGuard(props: PlasmicPageGuardProps) {
   // If we are in prepass, PlasmicPageGuard should not render anything
   // it's expected that pages are only equipped with PlasmicPageGuard
   // when it's known that it will disable prepass/prefetching
-  if (plasmicQuery.isPlasmicPrepass?.()) {
+  if (prepass) {
     return null;
   }
 

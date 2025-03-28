@@ -29,9 +29,6 @@ export type HeadMetadata = {
 export const HeadMetadataContext: React_2.Context<HeadMetadata>;
 
 // @public (undocumented)
-export function isPlasmicPrepass(): boolean;
-
-// @public (undocumented)
 export type LoadingStateListener = (isLoading: boolean) => void;
 
 // @public (undocumented)

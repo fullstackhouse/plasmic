@@ -306,7 +306,12 @@ export class InternalPrepassPlasmicLoader extends BaseInternalPlasmicComponentLo
         },
         "@plasmicapp/query": {
           addLoadingStateListener: () => noop,
-          isPlasmicPrepass: () => true,
+          PrepassContext: {
+            _currentValue: false,
+            displayName: "FakePrepassContext",
+            Provider: ({ children }: any) => <>{children}</>,
+            Consumer: ({ children }: any) => children({}),
+          } as any as React.Context<any>,
           PlasmicPrepassContext: {} as any,
           PlasmicQueryDataProvider: ({ children }: any) => <>{children}</>,
           useMutablePlasmicQueryData: fakeUseMutablePlasmicQueryData,

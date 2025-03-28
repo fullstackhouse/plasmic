@@ -2,8 +2,8 @@ import { DataProvider, useDataEnv } from "@plasmicapp/host";
 import registerComponent, {
   ComponentMeta,
 } from "@plasmicapp/host/registerComponent";
-import * as plasmicQuery from "@plasmicapp/query";
-import React, { Suspense, useState } from "react";
+import { PrepassContext } from "@plasmicapp/query";
+import React, { Suspense, useContext, useState } from "react";
 import { useIsomorphicLayoutEffect } from "./common";
 
 interface LoadingBoundaryProps {
@@ -47,8 +47,9 @@ export default function LoadingBoundary({
 }: LoadingBoundaryProps) {
   const isClient = useIsClient();
   const enableLoadingBoundary = !!useDataEnv()?.[enableLoadingBoundaryKey];
+  const prepass = useContext(PrepassContext);
 
-  if (!isClient && !plasmicQuery.isPlasmicPrepass?.()) {
+  if (!isClient && !prepass) {
     return null;
   }
 

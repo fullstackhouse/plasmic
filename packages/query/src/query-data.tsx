@@ -178,7 +178,7 @@ export function PlasmicQueryDataProvider(props: {
   }
 }
 
-const PrepassContext = React.createContext<boolean>(false);
+export const PrepassContext = React.createContext<boolean>(false);
 
 export function PlasmicPrepassContext(
   props: PropsWithChildren<{
@@ -253,11 +253,6 @@ function isPromiseLike(x: any) {
   return (
     !!x && typeof x === "object" && "then" in x && typeof x.then === "function"
   );
-}
-
-export function isPlasmicPrepass() {
-  return !!(React as any).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED
-    ?.ReactCurrentDispatcher?.current?.isPlasmicPrepass;
 }
 
 export type HeadMetadata = {
